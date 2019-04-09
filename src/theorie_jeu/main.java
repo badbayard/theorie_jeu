@@ -27,10 +27,10 @@ public class main {
                 total_0++;
             }
         }
+
         System.out.println("egalité     " + total_0);
         System.out.println("victoire j1 " + total_1);
         System.out.println("victoire j2 " + total_2);
-
 
     }
 }
