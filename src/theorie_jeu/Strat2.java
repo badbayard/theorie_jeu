@@ -1,43 +1,38 @@
 package theorie_jeu;
 
 public class Strat2 {
-    int nb_joueur; // nombre joueur
+    int id;
     int nb_pierre;
-    boolean fin = false;
 
-    public Strat2(int numero_joueur, int nombre_pierre) {
-        nb_joueur = numero_joueur;
+    public Strat2(int _id, int nombre_pierre) {
+        id = _id;
         nb_pierre = nombre_pierre;
-    }
-
-    public void set_fin() {
-        fin = true;
-    }
-
-    public void set_nb_joueur(int chiffre) {
-        nb_joueur = chiffre;
-    }
-
-    public void set_nb_pierre(int other_chiffre) {
-        nb_pierre = other_chiffre;
-    }
-
-    public int get_nb_joueur() {
-        return nb_joueur;
     }
 
     public int get_nb_pierre() {
         return nb_pierre;
     }
 
-    public boolean get_fin() {
-        return fin;
+    public int lancer(int caseTroll, int nbPierreAdv) {
+
+        int nb;
+        if (id == 1) {
+            nb = lancerJ1(caseTroll, nbPierreAdv);
+        } else {
+            nb = lancerJ2(caseTroll, nbPierreAdv);
+        }
+
+        nb_pierre -= nb;
+        assert (nb_pierre >= 0);
+
+        return nb;
     }
 
-    public int lancer(int caseTroll, int nbPierreAdv) {
+    private int lancerJ1(int caseTroll, int nbPierreAdv){
         int nb = 1;
-
-        switch (caseTroll){
+        int Min;
+        int Max;
+        switch (caseTroll) {
             case 2:
                 nb = nbPierreAdv + 1;
                 if (nb <= nb_pierre) {
@@ -46,31 +41,67 @@ public class Strat2 {
                 }
                 break;
             case 3:
-                nb = (int) (1 + (Math.random() * (3)));
+                Min = 1;
+                Max = 5;
+                nb = Min + (int)(Math.random() * ((Max - Min) + 1));
                 if (nb <= nb_pierre) {
                 } else {
                     nb = nb_pierre;
                 }
                 break;
             case 4:
-                nb = (int) (1 + (Math.random() * (5)));
+                Min = 1;
+                Max = 3;
+                nb = Min + (int)(Math.random() * ((Max - Min) + 1));
                 if (nb <= nb_pierre) {
                 } else {
                     nb = nb_pierre;
                 }
                 break;
             case 5:
-                if(nbPierreAdv < nb_pierre){
+                if (nbPierreAdv < nb_pierre) {
                     nb = nb_pierre;
                 }
                 break;
         }
-
-
-        /*MISE A JOUR ET VALIDATION*/
-        nb_pierre -= nb;
-        assert (nb_pierre >= 0);
-
+        return nb;
+    }
+    private int lancerJ2(int caseTroll, int nbPierreAdv){
+        int nb = 1;
+        int Min;
+        int Max;
+        switch (caseTroll) {
+            case 5:
+                nb = nbPierreAdv + 1;
+                if (nb <= nb_pierre) {
+                } else {
+                    nb = nb_pierre;
+                }
+                break;
+            case 4:
+                Min = 1;
+                Max = 5;
+                nb = Min + (int)(Math.random() * ((Max - Min) + 1));
+                if (nb <= nb_pierre) {
+                } else {
+                    nb = nb_pierre;
+                }
+                break;
+            case 3:
+                Min = 1;
+                Max = 3;
+                nb = Min + (int)(Math.random() * ((Max - Min) + 1));
+                if (nb <= nb_pierre) {
+                } else {
+                    nb = nb_pierre;
+                }
+                break;
+            case 2:
+                if (nbPierreAdv < nb_pierre) {
+                    nb = nb_pierre;
+                }
+                break;
+        }
         return nb;
     }
 }

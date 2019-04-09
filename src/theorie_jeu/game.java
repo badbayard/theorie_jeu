@@ -2,8 +2,8 @@ package theorie_jeu;
 
 public class game {
 
-    int nb_case;
-    int case_troll;
+    int nb_case = 7;
+    int case_troll = 4;
 
     public game () {
         
@@ -11,8 +11,7 @@ public class game {
     public int play() {
         //CREATION DES JOUEURS
         Strat2 j1 = new Strat2(1,15);
-        Strat1 j2 = new Strat1(2,15);
-
+        Strat2 j2 = new Strat2(2,15);
 
         int pierre_j1 = 0 ;
         int pierre_j2 = 0;
@@ -41,8 +40,6 @@ public class game {
                 return 1;
             } else if (j1.get_nb_pierre() == 0){
                 return 2;
-            } else {
-                return -1;
             }
         }
     }
