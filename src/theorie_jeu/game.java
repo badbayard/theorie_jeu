@@ -36,18 +36,21 @@ public class game {
             System.out.println("la position du trol est "+t1.position_troll );
             System.out.println("nombre de pierre j1 est : "+j1.get_nb_pierre() );
             System.out.println("nombre de pierre j2 est : "+j2.get_nb_pierre() );
-            
-            if (j2.get_nb_pierre()==0 || t1.get_position_troll() == 7){
+
+            if (j1.get_nb_pierre() == 0 && j2.get_nb_pierre() == 0) {
+                return 0;
+            }
+            if (j2.get_nb_pierre() == 0 || t1.get_position_troll() == 7){
                 System.out.println("j1 gagne");
                 // j1.set_fin();
                 j1.fin = true;
-                return j1.get_nb_joueur();
+                return 1;
             }
             if (j1.get_nb_pierre() == 0 || t1.get_position_troll() == 0){
                 System.out.println("j2 gagne");
                 // j2.set_fin();
                 j2.fin = true;
-                return j2.get_nb_joueur();
+                return 2;
             }
             
         }
