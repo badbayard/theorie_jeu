@@ -1,12 +1,9 @@
 package theorie_jeu;
 
-public class Strat2 {
-    int id;
-    int nb_pierre;
+public class Strat2 extends Joueur{
 
-    public Strat2(int _id, int nombre_pierre) {
-        id = _id;
-        nb_pierre = nombre_pierre;
+    Strat2(int _id, int _nb_pierre){
+        super(_id, _nb_pierre);
     }
 
     public int lancer(int caseTroll, int nbPierreAdv) {
@@ -73,16 +70,5 @@ public class Strat2 {
                 break;
         }
         return nb;
-    }
-
-    public int aleatoire(int min, int max){
-        return min + (int)(Math.random() * ((max - min) + 1));
-    }
-
-    public int verification(int n){
-        if (n > nb_pierre) {
-            n = nb_pierre;
-        }
-        return n;
     }
 }

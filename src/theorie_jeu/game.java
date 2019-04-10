@@ -12,7 +12,7 @@ public class game {
 
     public int play() {
 
-        Strat2 j1 = new Strat2(1, 15);
+        Random j1 = new Random(1, 15);
         Strat2 j2 = new Strat2(2, 15);
 
         while (case_troll != 1 && case_troll != 7 && j1.nb_pierre > 0 && j2.nb_pierre > 0) {
