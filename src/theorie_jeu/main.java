@@ -60,7 +60,8 @@ public class main {
         matrix [2][0] = -resRvs2;
         matrix [2][1] = -res1vs2;
         matrix [2][2] = res2vs2;
-
+        
+        System.out.println("Matrice des gains");
         printMatrix(matrix);
 
         switch (trouverPrudente(matrix)){
@@ -80,7 +81,9 @@ public class main {
 
         int[] tab = new int[2];
         tab = trouverNash(matrix);
-
+        
+        System.out.println(" ");
+        System.out.println("equilibre de Nash");
         System.out.println(tab[0]);
         System.out.println(tab[1]);
 
