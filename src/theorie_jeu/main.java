@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 public class main {
 
-
-
     public static void main(String[] args) {
 
         Game gameRvsR = new Game(
@@ -66,15 +64,15 @@ public class main {
 
         ////
 
-        int resRvsR = playGame(gameRvsR,1000);
-        int resRvs1 = playGame(gameRvs1,1000);
-        int resRvs2 = playGame(gameRvs2,1000);
-        int res1vs1 = playGame(game1vs1,1000);
-        int res1vs2 = playGame(game1vs2,1000);
-        int res2vs2 = playGame(game2vs2,1000);
-        int resSPvsR = playGame(gameSPvsR, 1000);
-        int resSPvs1 = playGame(gameSPvs1, 1000);
-        int resSPvs2 = playGame(gameSPvs2, 1000);
+        int resRvsR = playGame(gameRvsR,1000, false);
+        int resRvs1 = playGame(gameRvs1,1000, false);
+        int resRvs2 = playGame(gameRvs2,1000, false);
+        int res1vs1 = playGame(game1vs1,1000, false);
+        int res1vs2 = playGame(game1vs2,1000, false);
+        int res2vs2 = playGame(game2vs2,1000, false);
+        int resSPvsR = playGame(gameSPvsR, 1000, false);
+        int resSPvs1 = playGame(gameSPvs1, 1000, false);
+        int resSPvs2 = playGame(gameSPvs2, 1000, false);
         //pas de SP vs SP parceque SP est config pour J1
 
         int matrix[][] = new int [4][4];
@@ -87,7 +85,6 @@ public class main {
         matrix [2][0] = -resRvs2;
         matrix [2][1] = -res1vs2;
         matrix [2][2] = res2vs2;
-
         matrix [0][3] = -resSPvsR;
         matrix [1][3] = -resSPvs1;
         matrix [2][3] = -resSPvs2;
@@ -97,21 +94,61 @@ public class main {
         matrix [3][2] = resSPvs2;
 
         printMatrix(matrix);
-/*
 
-        Game gameSP = new Game(
-                new StratPrudente(1, 15),
-                new Strat1(2, 15),
-                new Terrain(7));
-
-
-
-        playGame(gameSP, 1);*/
+        //playGame(gameSPvsR, 1, true);
 
     }
 
 
+    static int playGame(Game g, int nbGame, boolean verbose){
 
+        int nbVictoireJ1 = 0;
+        int nbVictoireJ2 = 0;
+        int nbEgalite = 0;
+        ArrayList<Integer> tab = new ArrayList<>();
+
+        for (int i=0 ; i< nbGame ;i++) {
+            tab.add(g.play(verbose));
+        }
+
+        for(int i = 0 ; i < tab.size(); i++) {
+            //System.out.println(tab.get(i)); liste des matchs gagne
+            if (tab.get(i)== 1) {
+                nbVictoireJ1++;
+            }else if (tab.get(i) == 2){
+                nbVictoireJ2++;
+            } else {
+                nbEgalite++;
+            }
+        }
+        if(verbose){
+            System.out.println("egalité     " + nbEgalite);
+            System.out.println("victoire j1 " + nbVictoireJ1);
+            System.out.println("victoire j2 " + nbVictoireJ2);
+        }
+
+        return nbVictoireJ1 - nbVictoireJ2;
+    }
+
+    public static void printMatrix(int[][] m){
+        try{
+            int rows = m.length;
+            int columns = m[0].length;
+            String str = "|\t";
+
+            for(int i=0;i<rows;i++){
+                for(int j=0;j<columns;j++){
+                    str += m[i][j] + "\t";
+                }
+
+                System.out.println(str + "|");
+                str = "|\t";
+            }
+
+        }catch(Exception e){System.out.println("Matrix is empty!!");}
+    }
+
+    /*
     private static int trouverPrudente(int[][] matrix) {
         int ligne = -1;
         int total;
@@ -164,51 +201,6 @@ public class main {
         return tab;
     }
 
-
-    static int playGame(Game g, int nbGame){
-
-        int nbVictoireJ1 = 0;
-        int nbVictoireJ2 = 0;
-        int nbEgalite = 0;
-        ArrayList<Integer> tab = new ArrayList<>();
-
-        for (int i=0 ; i< nbGame ;i++) {
-            tab.add(g.play());
-        }
-
-        for(int i = 0 ; i < tab.size(); i++) {
-            //System.out.println(tab.get(i)); liste des matchs gagne
-            if (tab.get(i)== 1) {
-                nbVictoireJ1++;
-            }else if (tab.get(i) == 2){
-                nbVictoireJ2++;
-            } else {
-                nbEgalite++;
-            }
-        }
-        //System.out.println("egalité     " + nbEgalite);
-        //System.out.println("victoire j1 " + nbVictoireJ1);
-        //System.out.println("victoire j2 " + nbVictoireJ2);
-
-        return nbVictoireJ1 - nbVictoireJ2;
-    }
-
-    public static void printMatrix(int[][] m){
-        try{
-            int rows = m.length;
-            int columns = m[0].length;
-            String str = "|\t";
-
-            for(int i=0;i<rows;i++){
-                for(int j=0;j<columns;j++){
-                    str += m[i][j] + "\t";
-                }
-
-                System.out.println(str + "|");
-                str = "|\t";
-            }
-
-        }catch(Exception e){System.out.println("Matrix is empty!!");}
-    }
+     */
 
 }
