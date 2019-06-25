@@ -2,9 +2,9 @@ package theorie_jeu.Strategies;
 
 import theorie_jeu.Strategies.Strategie;
 
-public class Strat2 extends Strategie {
+public class StratRandomBorne extends Strategie {
 
-    public Strat2(int numero_joueur, int nombre_pierre) {
+    public StratRandomBorne(int numero_joueur, int nombre_pierre) {
         super(numero_joueur,nombre_pierre);
     }
 

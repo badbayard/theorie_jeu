@@ -1,7 +1,7 @@
 package theorie_jeu;
 
 import theorie_jeu.Strategies.Strat1;
-import theorie_jeu.Strategies.Strat2;
+import theorie_jeu.Strategies.StratRandomBorne;
 import theorie_jeu.Strategies.StratPrudente;
 import theorie_jeu.Strategies.StratRandom;
 
@@ -23,7 +23,7 @@ public class main {
 
         Game gameRvs2 = new Game(
                 new StratRandom(1, 15),
-                new Strat2(2, 15),
+                new StratRandomBorne(2, 15),
                 new Terrain(7));
 
         ////////
@@ -35,14 +35,14 @@ public class main {
 
         Game game1vs2 = new Game(
                 new Strat1(1, 15),
-                new Strat2(2, 15),
+                new StratRandomBorne(2, 15),
                 new Terrain(7));
 
         ////////
 
         Game game2vs2 = new Game(
-                new Strat2(1, 15),
-                new Strat2(2, 15),
+                new StratRandomBorne(1, 15),
+                new StratRandomBorne(2, 15),
                 new Terrain(7));
 
         ///////
@@ -59,7 +59,7 @@ public class main {
 
         Game gameSPvs2 = new Game(
                 new StratPrudente(1, 15),
-                new Strat2(2, 15),
+                new StratRandomBorne(2, 15),
                 new Terrain(7));
 
         ////
@@ -95,7 +95,7 @@ public class main {
 
         printMatrix(matrix);
 
-        //playGame(gameSPvsR, 1, true);
+        playGame(gameSPvs1, 1, true);
 
     }
 

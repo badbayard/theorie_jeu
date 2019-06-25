@@ -1,7 +1,7 @@
 package theorie_jeu;
 
 import theorie_jeu.Strategies.Strat1;
-import theorie_jeu.Strategies.Strat2;
+import theorie_jeu.Strategies.StratRandomBorne;
 import theorie_jeu.Strategies.Strategie;
 
 public class Game {
@@ -10,7 +10,7 @@ public class Game {
     Strategie j2;
     Terrain terrain;
 
-    
+
     public Game(Strategie strategiej1, Strategie strategiej2, Terrain terrainjeu) {
         j1 = strategiej1;
         j2 = strategiej2;
@@ -28,7 +28,7 @@ public class Game {
         init();
 
         if(verbose){
-            System.out.println("la position du trol initial " + terrain.getPosition_troll() );
+            System.out.println("la position du troll initial " + terrain.getPosition_troll() );
         }
 
         while(true) {
@@ -54,7 +54,7 @@ public class Game {
 
             //INFO
             if(verbose) {
-                System.out.println("la position du trol est : " + terrain.getPosition_troll());
+                System.out.println("la position du troll est : " + terrain.getPosition_troll());
                 System.out.println("nombre de pierre j1 est : " + j1.getNbPierre());
                 System.out.println("nombre de pierre j2 est : " + j2.getNbPierre());
             }
@@ -91,18 +91,42 @@ public class Game {
                 return 0;
             }
             if (j2.getNbPierre() == 0){
-                if(verbose){
-                    System.out.println("j1 gagne");
+                if(terrain.getPosition_troll() + j1.getNbPierre() > 3){
+                    if(verbose){
+                        System.out.println("j1 gagne");
+                    }
+                    return 1;
                 }
-                return 1;
+                if(terrain.getPosition_troll() + j1.getNbPierre() < 3){
+                    if(verbose){
+                        System.out.println("j2 gagne");
+                    }
+                    return 2;
+                }
+                if(verbose){
+                    System.out.println("egalite");
+                }
+                return 0;
             }
             if (j1.getNbPierre() == 0){
-                if(verbose){
-                    System.out.println("j2 gagne");
+                if(terrain.getPosition_troll() - j2.getNbPierre() > 3){
+                    if(verbose){
+                        System.out.println("j1 gagne");
+                    }
+                    return 1;
                 }
-                return 2;
+                if(terrain.getPosition_troll() - j2.getNbPierre() < 3){
+                    if(verbose){
+                        System.out.println("j2 gagne");
+                    }
+                    return 2;
+                }
+                if(verbose){
+                    System.out.println("egalite");
+                }
+                return 0;
             }
-            
+
         }
     }
 
