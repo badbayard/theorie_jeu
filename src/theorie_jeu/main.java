@@ -7,8 +7,36 @@ import theorie_jeu.Strategies.StratRandom;
 import java.util.ArrayList;
 
 public class main {
-    
+
+
+
     public static void main(String[] args) {
+
+        Struct struct = new Struct();
+
+        struct.init();
+
+        //System.out.println(struct.GoptTable[2][3][3]);
+        System.out.println("RES = " + struct.calcul(13,12,3));
+        System.out.println("RES = " + struct.calcul(15,15,3));
+        System.out.println("RES = " + struct.calcul(12,13,3));
+        //System.out.println(struct.GoptTable[2][3][3]);
+
+        for(int x = 0; x <= 15; x++){
+            for(int y = 0; y<= 15; y++){
+                for(int t = 0; t <7; t++){
+                    struct.calcul(x,y,t);
+                }
+            }
+        }
+
+        struct.printGopt();
+
+        struct.GoptTable
+
+
+
+        /*
 
         Game gameRvsR = new Game(
                 new StratRandom(1, 15),
@@ -87,7 +115,15 @@ public class main {
         System.out.println(tab[0]);
         System.out.println(tab[1]);
 
+
+
+*/
+
+
+
     }
+
+
 
     private static int trouverPrudente(int[][] matrix) {
         int ligne = -1;
