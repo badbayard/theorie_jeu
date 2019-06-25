@@ -35,6 +35,8 @@ public class Game {
             int nbPierreJ2debutTour = j2.getNbPierre();
             int pierre_j1 = j1.lancer(nbPierreJ2debutTour, terrain.getPosition_troll());
             int pierre_j2 = j2.lancer(nbPierreJ1debutTour, terrain.getPosition_troll());
+            //System.out.println("j1 lance " + pierre_j1 );
+            //System.out.println("j2 lance " + pierre_j2 );
 
             //MODIFICATION DU POSITIONEMENT DU TROLL
             if (pierre_j1 > pierre_j2){
@@ -51,24 +53,31 @@ public class Game {
 
             //TEST DE FIN DE JEU
             if (terrain.getPosition_troll() == terrain.getCaseMax()){
+                //System.out.println("j1 gagne");
                 return 1;
             }
             if (terrain.getPosition_troll() == terrain.getCaseMin()) {
+                //System.out.println("j2 gagne");
                 return 2;
             }
             if (j1.getNbPierre() == 0 && j2.getNbPierre() == 0) {
                 if(terrain.getPosition_troll() < 3) {
+                    //System.out.println("j2 gagne");
                     return 2;
                 }
                 else if (terrain.getPosition_troll() > 3) {
+                    //System.out.println("j1 gagne");
                     return 1;
                 }
+                //System.out.println("egalite");
                 return 0;
             }
             if (j2.getNbPierre() == 0){
+                //System.out.println("j1 gagne");
                 return 1;
             }
             if (j1.getNbPierre() == 0){
+                //System.out.println("j2 gagne");
                 return 2;
             }
             

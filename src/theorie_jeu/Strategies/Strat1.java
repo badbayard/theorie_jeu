@@ -41,7 +41,7 @@ public class Strat1 extends Strategie {
                 if (plusDePierre) {
                     nb = 2;
                 } else {
-                    nb = 1;
+                    nb = 2;
                 }
                 break;
             case 4:

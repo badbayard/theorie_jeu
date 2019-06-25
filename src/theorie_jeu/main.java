@@ -2,6 +2,7 @@ package theorie_jeu;
 
 import theorie_jeu.Strategies.Strat1;
 import theorie_jeu.Strategies.Strat2;
+import theorie_jeu.Strategies.StratPrudente;
 import theorie_jeu.Strategies.StratRandom;
 
 import java.util.ArrayList;
@@ -11,32 +12,6 @@ public class main {
 
 
     public static void main(String[] args) {
-
-        Struct struct = new Struct();
-
-        struct.init();
-
-        //System.out.println(struct.GoptTable[2][3][3]);
-        System.out.println("RES = " + struct.calcul(13,12,3));
-        System.out.println("RES = " + struct.calcul(15,15,3));
-        System.out.println("RES = " + struct.calcul(12,13,3));
-        //System.out.println(struct.GoptTable[2][3][3]);
-
-        for(int x = 0; x <= 15; x++){
-            for(int y = 0; y<= 15; y++){
-                for(int t = 0; t <7; t++){
-                    struct.calcul(x,y,t);
-                }
-            }
-        }
-
-        struct.printGopt();
-
-        struct.GoptTable
-
-
-
-        /*
 
         Game gameRvsR = new Game(
                 new StratRandom(1, 15),
@@ -72,13 +47,37 @@ public class main {
                 new Strat2(2, 15),
                 new Terrain(7));
 
-        int resRvsR = playGame(gameRvsR);
-        int resRvs1 = playGame(gameRvs1);
-        int resRvs2 = playGame(gameRvs2);
-        int res1vs1 = playGame(game1vs1);
-        int res1vs2 = playGame(game1vs2);
-        int res2vs2 = playGame(game2vs2);
-        int matrix[][] = new int [3][3];
+        ///////
+
+        Game gameSPvsR = new Game(
+                new StratPrudente(1, 15),
+                new StratRandom(2, 15),
+                new Terrain(7));
+
+        Game gameSPvs1 = new Game(
+                new StratPrudente(1, 15),
+                new Strat1(2, 15),
+                new Terrain(7));
+
+        Game gameSPvs2 = new Game(
+                new StratPrudente(1, 15),
+                new Strat2(2, 15),
+                new Terrain(7));
+
+        ////
+
+        int resRvsR = playGame(gameRvsR,1000);
+        int resRvs1 = playGame(gameRvs1,1000);
+        int resRvs2 = playGame(gameRvs2,1000);
+        int res1vs1 = playGame(game1vs1,1000);
+        int res1vs2 = playGame(game1vs2,1000);
+        int res2vs2 = playGame(game2vs2,1000);
+        int resSPvsR = playGame(gameSPvsR, 1000);
+        int resSPvs1 = playGame(gameSPvs1, 1000);
+        int resSPvs2 = playGame(gameSPvs2, 1000);
+        //pas de SP vs SP parceque SP est config pour J1
+
+        int matrix[][] = new int [4][4];
         matrix [0][0] = resRvsR;
         matrix [0][1] = resRvs1;
         matrix [0][2] = resRvs2;
@@ -88,38 +87,26 @@ public class main {
         matrix [2][0] = -resRvs2;
         matrix [2][1] = -res1vs2;
         matrix [2][2] = res2vs2;
-        
-        System.out.println("Matrice des gains");
+
+        matrix [0][3] = -resSPvsR;
+        matrix [1][3] = -resSPvs1;
+        matrix [2][3] = -resSPvs2;
+        //matrix [3][3] = -;
+        matrix [3][0] = resSPvsR;
+        matrix [3][1] = resSPvs1;
+        matrix [3][2] = resSPvs2;
+
         printMatrix(matrix);
+/*
 
-        switch (trouverPrudente(matrix)){
-            case 0:
-                System.out.println("Strategie prudente est StratRandom");
-                break;
-            case 1:
-                System.out.println("Strategie prudente est Strat1");
-                break;
-            case 2:
-                System.out.println("Strategie prudente est Strat2");
-                break;
-            default:
-                assert (false);
-                break;
-        }
-
-        int[] tab = new int[2];
-        tab = trouverNash(matrix);
-        
-        System.out.println(" ");
-        System.out.println("equilibre de Nash");
-        System.out.println(tab[0]);
-        System.out.println(tab[1]);
+        Game gameSP = new Game(
+                new StratPrudente(1, 15),
+                new Strat1(2, 15),
+                new Terrain(7));
 
 
 
-*/
-
-
+        playGame(gameSP, 1);*/
 
     }
 
@@ -178,14 +165,14 @@ public class main {
     }
 
 
-    static int playGame(Game g){
+    static int playGame(Game g, int nbGame){
 
         int nbVictoireJ1 = 0;
         int nbVictoireJ2 = 0;
         int nbEgalite = 0;
         ArrayList<Integer> tab = new ArrayList<>();
 
-        for (int i=0 ; i< 200 ;i++) {
+        for (int i=0 ; i< nbGame ;i++) {
             tab.add(g.play());
         }
 
